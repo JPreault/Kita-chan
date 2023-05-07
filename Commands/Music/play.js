@@ -25,10 +25,6 @@ module.exports = {
             return interaction.reply({ embeds: [embed], ephemeral: true});
         }
 
-        console.log(`member.voice.channelId ${member.voice.channelId}`)
-        console.log(`guild.members.me.voice.channelId ${guild.members.me.voice.channelId}`)
-
-
         if(member.voice.channelId != guild.members.me.voice.channelId && guild.members.me.voice.channelId) {
             embed.setColor("Red").setDescription(`Alredy playing : <#${guild.members.me.voice.channelId}>`);
             return interaction.reply({ embeds: [embed], ephemeral: true});
