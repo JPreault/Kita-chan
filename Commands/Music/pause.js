@@ -33,7 +33,9 @@ module.exports = {
             }
             
             await queue.pause(voiceChannel);
+            
             console.log(`${member.user.username} à pause !`)
+
             embed.setColor("Orange").setDescription("The song has been paused");
             return interaction.reply({ embeds: [embed], ephemeral: true});
 
