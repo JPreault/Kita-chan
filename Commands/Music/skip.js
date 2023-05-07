@@ -15,12 +15,12 @@ module.exports = {
         const embed = new EmbedBuilder();
 
         if(!voiceChannel){
-            embed.setColor("Red").setDescription("You must be in a voice channel to execute music commands");
+            embed.setColor("Red").setDescription("Join a voice channel first");
             return interaction.reply({ embeds: [embed], ephemeral: true});
         }
 
         if(!member.voice.channelId == guild.members.me.voice.channelId) {
-            embed.setColor("Red").setDescription(`You can't use the music player as it is already active is <#${guild.members.me.voice.channelId}>`);
+            embed.setColor("Red").setDescription(`Alredy playing : <#${guild.members.me.voice.channelId}>`);
             return interaction.reply({ embeds: [embed], ephemeral: true});
         }
 
@@ -28,18 +28,18 @@ module.exports = {
             
             const queue = await client.distube.getQueue(voiceChannel);
             if(!queue) {
-                embed.setColor("Red").setDescription("There is no active queue");
+                embed.setColor("Red").setDescription("There is no queue");
                 return interaction.reply({ embeds: [embed], ephemeral: true});
             }
             
             await queue.skip(voiceChannel);
-            embed.setColor("Blue").setDescription("The song has been skipped");
+            embed.setColor("Blue").setDescription(`Skip`);
             return interaction.reply({ embeds: [embed], ephemeral: true});
 
         } catch  (err){
             console.log(err);
 
-            embed.setColor("Red").setDescription("Somthing went wrong...");
+            embed.setColor("Red").setDescription("Bug :/");
 
             return interaction.reply({ embeds: [embed], ephemeral: true});  
         }

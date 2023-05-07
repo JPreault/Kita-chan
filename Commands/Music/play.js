@@ -7,7 +7,7 @@ module.exports = {
         .setDescription("Play a song")
         .addStringOption(option =>
             option.setName("query")
-            .setDescription('Provide the name or url for the song')
+            .setDescription('name or url')
             .setRequired(true)
         ),
         
@@ -21,26 +21,30 @@ module.exports = {
         const embed = new EmbedBuilder();
 
         if(!voiceChannel){
-            embed.setColor("Red").setDescription("You must be in a voice channel to execute music commands");
+            embed.setColor("Red").setDescription("Join a voice channel first");
             return interaction.reply({ embeds: [embed], ephemeral: true});
         }
 
-        if(!member.voice.channelId == guild.members.me.voice.channelId) {
-            embed.setColor("Red").setDescription(`You can't use the music player as it is already active is <#${guild.members.me.voice.channelId}>`);
+        console.log(`member.voice.channelId ${member.voice.channelId}`)
+        console.log(`guild.members.me.voice.channelId ${guild.members.me.voice.channelId}`)
+
+
+        if(member.voice.channelId != guild.members.me.voice.channelId && guild.members.me.voice.channelId) {
+            embed.setColor("Red").setDescription(`Alredy playing : <#${guild.members.me.voice.channelId}>`);
             return interaction.reply({ embeds: [embed], ephemeral: true});
         }
 
         try{
-            
+            console.log(`Song Add: ${query}`)
             client.distube.play(voiceChannel, query, {textChannel: channel, member: member});
-            return interaction.reply({ content: " Request Received"});
+            return interaction.reply({ content: " Song Add"});
 
         } catch  (err){
             console.log(err);
 
-            embed.setColor("Red").setDescription("Somthing went wrong...");
+            embed.setColor("Red").setDescription("Bug :/");
 
-            return interaction.reply({ embeds: [embed], ephemeral: true});  
+            return interaction.reply({ embeds: [embed], ephemeral: true});
         }
     }
 }
