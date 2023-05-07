@@ -37,6 +37,8 @@ module.exports = {
             console.log(`${member.user.username} à pause !`)
 
             embed.setColor("Orange").setDescription("The song has been paused");
+            console.log(`${member.user.username} à mis en pause`);
+            console.log('patrick');
             return interaction.reply({ embeds: [embed], ephemeral: true});
 
         } catch  (err){
