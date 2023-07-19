@@ -23,13 +23,16 @@ client.distube = new DisTube(client, {
     plugins: [new SpotifyPlugin()]
 })
 
-
 client.commands = new Collection();
-
 
 module.exports = client;
 
-client.login(process.env.TOKEN).then(()=>{
+client.login(process.env.TOKEN).then( async ()=>{
+    //client.db = await loadDataBase();
+    //client.db.getConnection( (err, connection) => {
+    //    if(err) throw err; // Not connected
+    //    console.log(' DB Connected')
+    //})
     loadEvents(client);
     loadCommands(client);
 })

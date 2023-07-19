@@ -26,7 +26,7 @@ module.exports = {
         }
 
         if(member.voice.channelId != guild.members.me.voice.channelId && guild.members.me.voice.channelId) {
-            embed.setColor("Red").setDescription(`Alredy playing : <#${guild.members.me.voice.channelId}>`);
+            embed.setColor("Red").setDescription(`Alredy playing in : <#${guild.members.me.voice.channelId}>`);
             return interaction.reply({ embeds: [embed], ephemeral: true});
         }
 
@@ -35,7 +35,7 @@ module.exports = {
             client.distube.play(voiceChannel, query, {textChannel: channel, member: member});
             return interaction.reply({ content: " Song Add"});
 
-        } catch  (err){
+        } catch (err){
             console.log(err);
 
             embed.setColor("Red").setDescription("Bug :/");

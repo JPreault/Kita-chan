@@ -3,7 +3,7 @@ const {CommandInteraction} = require("discord.js");
 module.exports = {
     name: "interactionCreate",
 
-    execute(interaction, client){
+    async execute(interaction, client){
 
         if(!interaction.isChatInputCommand()) return;
 
@@ -12,5 +12,6 @@ module.exports = {
         if(!command) return interaction.reply({content: "outdated command"});
         
         command.execute(interaction, client);
+
     },
 };
